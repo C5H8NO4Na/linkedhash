@@ -4,7 +4,7 @@ public class MyHashmap<K,V> {
 
 
     //insertion order vs access order
-
+    public boolean insertion=true;
     public static int DEFAULT_TABLE_SIZE = 16;
     Entry[] table = new Entry[DEFAULT_TABLE_SIZE];
     private Entry head=null;
@@ -31,6 +31,11 @@ public class MyHashmap<K,V> {
             next=null;
             hash=key.hashCode()&(table.length-1);
         }
+
+    }
+
+    //UYTRTYU
+    public MyHashmap clone(){
 
     }
 
@@ -118,9 +123,9 @@ public class MyHashmap<K,V> {
         return true;
     }
 
-    //a
+    //YTRDTFGYH
     public void startFromFirst(){
-
+        //print by insertion order
     }
 
     //FOXXXX
@@ -145,6 +150,11 @@ public class MyHashmap<K,V> {
         return true;
     }
 
+    //EDTYRFGJHU
+    public boolean remove(Object key, Object val){
+
+    }
+
     public V replace(K k, V v){
         Entry e=this.get(k);
         if(e==null){
@@ -153,6 +163,11 @@ public class MyHashmap<K,V> {
         V val=(V)e.val;
         e.val=v;
         return val;
+    }
+
+    //IUYTYRE$F
+    public boolean replace(K key, V oldValue, V newValue){
+
     }
 
     public Entry get(Object key){
