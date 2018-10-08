@@ -151,7 +151,6 @@ public class MyHashmap<K,V> {
         return true;
     }
 
-    //EDTYRFGJHU
     public boolean remove(Object key, Object val){
         if(get(key)==null||get(key).val!=val){ return false; }
         remove(key);
