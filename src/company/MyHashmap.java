@@ -37,9 +37,7 @@ public class MyHashmap<K,V> {
     public MyHashmap clone(){
         MyHashmap<K,V> newMap=new MyHashmap<>();
         Entry e=head;
-        if(e==null){
-            return null;
-        }
+        if(e==null){ return null; }
         while(e.after!=null){
             newMap.put((K)e.key, (V)e.val);
             e=e.after;
@@ -48,9 +46,7 @@ public class MyHashmap<K,V> {
     }
 
     public boolean containsKey(Object k){
-        if(get(k)==null){
-            return false;
-        }
+        if(get(k)==null){ return false; }
         return true;
     }
 
@@ -60,25 +56,19 @@ public class MyHashmap<K,V> {
         while(e.val!=v&&e.after!=null){
             e=e.after;
         }
-        if(e.val==v){
-            return true;
-        }
+        if(e.val==v){ return true; }
         return false;
     }
 
     public Object getOrDefault(Object key, V defaultValue){
         Entry e=this.get(key);
-        if(e==null){
-            return defaultValue;
-        }
+        if(e==null){ return defaultValue; }
         return e;
     }
 
     public boolean isEmpty(){
         for(Entry e:table){
-            if(!e.equals(null)){
-                return false;
-            }
+            if(!e.equals(null)){ return false; }
         }
         return true;
     }
@@ -100,18 +90,14 @@ public class MyHashmap<K,V> {
     }
 
     public V putIfAbsent(K key, V value){
-        if(this.put(key, value)==false){
-            return (V)this.get(key);
-        }
+        if(this.put(key, value)==false){ return (V)this.get(key); }
         return null;
     }
 
     public boolean put(K k, V v){
         Entry p=new Entry(k, null);
         Entry e=table[p.hash];
-        if(this.get(k)!=null){
-            return false;
-        }
+        if(this.get(k)!=null){ return false; }
         if(this.size()>=table.length){
             Entry[] t=new Entry[table.length*2];
             for(int i=0; i<table.length; i++){
@@ -139,9 +125,7 @@ public class MyHashmap<K,V> {
     public void startFromFirst(){
         Entry e=head;
         boolean is=true;
-        if(e==null){
-            is=false;
-        }
+        if(e==null){ is=false; }
         while(e.after!=null&&is){
             System.out.println(e.val);
             e=e.after;
@@ -150,9 +134,7 @@ public class MyHashmap<K,V> {
 
     public boolean remove(Object key){
         Entry p=new Entry(key, null);
-        if(table[p.hash]==null) {
-            return false;
-        }
+        if(table[p.hash]==null) { return false; }
         Entry e=table[p.hash];
 
         if(e.key.equals(key)&&e.next==null){
@@ -163,9 +145,7 @@ public class MyHashmap<K,V> {
         while(!e.key.equals(key) && e.next!=null){
             e=e.next;
         }
-        if(e.next==null){
-            return false;
-        }
+        if(e.next==null){ return false; }
         e.before=e.after;
         e.before.next=e.next;
         return true;
@@ -173,36 +153,32 @@ public class MyHashmap<K,V> {
 
     //EDTYRFGJHU
     public boolean remove(Object key, Object val){
-
+        if(get(key)==null||get(key).val!=val){ return false; }
+        remove(key);
+        return true;
     }
 
     public V replace(K k, V v){
         Entry e=this.get(k);
-        if(e==null){
-            return null;
-        }
+        if(e==null){ return null; }
         V val=(V)e.val;
         e.val=v;
         return val;
     }
 
-    //IUYTYRE$F
     public boolean replace(K key, V oldValue, V newValue){
-
+        Entry e=get(key);
+        if(e==null||e.val!=oldValue){ return false; }
+        e.val=newValue;
+        return true;
     }
 
     public Entry get(Object key){
         Entry p=new Entry(key, null);
         Entry e=table[p.hash];
-        if(e == null){
-            return null;
-        }
+        if(e == null){ return null; }
         while(!e.key.equals(key)){
-            if(e==null){
-                return null;
-            }
-            e=e.next;
-        }
+            if(e==null){ return null; }e=e.next; }
         return e;
     }
 
