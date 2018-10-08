@@ -106,7 +106,6 @@ public class MyHashmap<K,V> {
         return null;
     }
 
-    //FIXX
     public boolean put(K k, V v){
         Entry p=new Entry(k, null);
         Entry e=table[p.hash];
@@ -122,12 +121,18 @@ public class MyHashmap<K,V> {
         }
         if(e==null){
             table[p.hash]=new Entry(k, v);
+            e.after=head;
+            if(head!=null){head.before=e;}
+            head=e;
             return true;
         }
         while(e.next!=null){
             e=e.next;
         }
         e.next=new Entry(k, v);
+        e.after=head;
+        if(head!=null){head.before=e;}
+        head=e;
         return true;
     }
 
