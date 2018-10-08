@@ -34,9 +34,17 @@ public class MyHashmap<K,V> {
 
     }
 
-    //UYTRTYU
     public MyHashmap clone(){
-
+        MyHashmap<K,V> newMap=new MyHashmap<>();
+        Entry e=head;
+        if(e==null){
+            return null;
+        }
+        while(e.after!=null){
+            newMap.put((K)e.key, (V)e.val);
+            e=e.after;
+        }
+        return newMap;
     }
 
     public boolean containsKey(Object k){
@@ -123,9 +131,16 @@ public class MyHashmap<K,V> {
         return true;
     }
 
-    //YTRDTFGYH
     public void startFromFirst(){
-        //print by insertion order
+        Entry e=head;
+        boolean is=true;
+        if(e==null){
+            is=false;
+        }
+        while(e.after!=null&&is){
+            System.out.println(e.val);
+            e=e.after;
+        }
     }
 
     //FOXXXX
