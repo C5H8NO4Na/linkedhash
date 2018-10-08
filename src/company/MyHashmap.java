@@ -148,7 +148,6 @@ public class MyHashmap<K,V> {
         }
     }
 
-    //FOXXXX
     public boolean remove(Object key){
         Entry p=new Entry(key, null);
         if(table[p.hash]==null) {
@@ -157,6 +156,7 @@ public class MyHashmap<K,V> {
         Entry e=table[p.hash];
 
         if(e.key.equals(key)&&e.next==null){
+            e.before=e.after;
             table[p.hash]=null;
             return true;
         }
@@ -166,7 +166,8 @@ public class MyHashmap<K,V> {
         if(e.next==null){
             return false;
         }
-        e.next=e.next.next;
+        e.before=e.after;
+        e.before.next=e.next;
         return true;
     }
 
