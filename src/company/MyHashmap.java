@@ -18,7 +18,7 @@ public class MyHashmap<K,V> {
     }
 
     public MyHashmap(boolean insertion){
-        insertion=true;
+        this.insertion=insertion;
         table = new Entry[DEFAULT_TABLE_SIZE];
     }
 
@@ -111,8 +111,30 @@ public class MyHashmap<K,V> {
             table=t;
         }
         Entry entry=new Entry(k, v);
+        if(head==null){
+            head=entry;
+            return true;
+        }
         if(e==null){
             table[p.hash]=entry;
+            if(this.insertion){
+                e=head;
+                while(e.after!=null){
+                    e=e.after;
+                }
+                e.after=entry;
+                entry.before=e;
+                return true;
+            }
+            if(this.insertion){
+                e=head;
+                while(e.after!=null){
+                    e=e.after;
+                }
+                e.after=entry;
+                entry.before=e;
+                return true;
+            }
             entry.after=head;
             if(head!=null){head.before=e;}
             head=entry;
@@ -120,6 +142,9 @@ public class MyHashmap<K,V> {
         }
         while(e.next!=null){
             e=e.next;
+        }
+        if(insertion){
+
         }
         e.next=entry;
         e.after=head;
