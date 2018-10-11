@@ -2,8 +2,6 @@ package company;
 
 public class MyHashmap<K,V> {
 
-
-    //insertion order vs access order
     public boolean insertion=true;
     public static int DEFAULT_TABLE_SIZE = 16;
     Entry[] table;
@@ -112,6 +110,7 @@ public class MyHashmap<K,V> {
         }
         Entry entry=new Entry(k, v);
         if(head==null){
+            table[p.hash]=entry;
             head=entry;
             return true;
         }
