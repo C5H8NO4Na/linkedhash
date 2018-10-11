@@ -101,12 +101,6 @@ public class MyHashmap<K,V> {
 
     public boolean put(K k, V v){
         Entry p=new Entry(k, null);
-        Entry entry=new Entry(k, v);
-        if(isEmpty()){
-            table[p.hash]=entry;
-            head=entry;
-            return true;
-        }
         Entry e=table[p.hash];
         if(this.get(k)!=null){ return false; }
         if(this.size()>=table.length){
@@ -116,19 +110,11 @@ public class MyHashmap<K,V> {
             }
             table=t;
         }
+        Entry entry=new Entry(k, v);
         if(e==null){
             table[p.hash]=entry;
-            if(!insertion){
-                e=head;
-                while(e!=null){
-                    e=e.after;
-                }
-                e.after=entry;
-                entry.before=e;
-                return true;
-            }
             entry.after=head;
-            head.before=entry;
+            if(head!=null){head.before=e;}
             head=entry;
             return true;
         }
@@ -136,18 +122,9 @@ public class MyHashmap<K,V> {
             e=e.next;
         }
         e.next=entry;
-        if(!insertion){
-            e=head;
-            while(e!=null){
-                e=e.after;
-            }
-            e.after=entry;
-            entry.before=e;
-            return true;
-        }
-        entry.after=head;
-        head.before=entry;
-        head=entry;
+        e.after=head;
+        if(head!=null){head.before=e;}
+        head=e;
         return true;
     }
 
@@ -170,10 +147,19 @@ public class MyHashmap<K,V> {
         p=table[p.hash];
         if(p==e){
             if(e==head){
-                e.after=head;
+                if(e.before!=null){
+                    head=e.before;
+                    head.after=e.after;
+                }
+                head=e.after;
+                return true;
+            }
+            if(e.before==null){
+                table[p.hash]=null;
                 return true;
             }
             e.before.after=e.after;
+            table[p.hash]=null;
             return true;
         }
         while(p.next!=e){
