@@ -17,8 +17,11 @@ public class Main {
         mymap.put(1,"d");
         System.out.println("4: "+mymap.get(1).val);
         mymap.remove(1);
-        System.out.print("5: "+mymap.get(1).val);
-        System.out.println("Access Order: ");
+        System.out.println("5: "+mymap.get(1).val);
+        mymap.put(4,"e");
+        mymap.put(3,"f");
+        mymap.put(2, "g");
+        System.out.print("Access Order: ");
         mymap.startFromFirst();
 
         System.out.println();
@@ -35,8 +38,11 @@ public class Main {
         mymap2.put(1,"d");
         System.out.println("4: "+mymap2.get(1).val);
         mymap2.remove(1);
-        System.out.print("5: "+mymap2.get(1).val);
-        System.out.println("Insertion Order: ");
+        System.out.println("5: "+mymap2.get(1).val);
+        mymap.put(4,"e");
+        mymap.put(3,"f");
+        mymap.put(2, "g");
+        System.out.print("Insertion Order: ");
         mymap.startFromFirst();
     }
 }

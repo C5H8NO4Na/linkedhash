@@ -155,9 +155,11 @@ public class MyHashmap<K,V> {
         Entry e=head;
         boolean is=true;
         if(e==null){ is=false; }
+        int i=1;
         while(e.after!=null&&is){
-            System.out.println(e.val);
+            System.out.print(i+": "+e.val+"  ");
             e=e.after;
+            i++;
         }
     }
 
