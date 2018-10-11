@@ -17,8 +17,11 @@ public class Main {
         mymap.put(1,"d");
         System.out.println("4: "+mymap.get(1).val);
         mymap.remove(1);
-        System.out.print(mymap.get(1));
+        System.out.print("5: "+mymap.get(1).val);
+        System.out.println("Access Order: ");
         mymap.startFromFirst();
+
+        System.out.println();
 
         MyHashmap<Integer, String> mymap2 = new MyHashmap<>(true);
 
@@ -32,7 +35,8 @@ public class Main {
         mymap2.put(1,"d");
         System.out.println("4: "+mymap2.get(1).val);
         mymap2.remove(1);
-        System.out.print(mymap2.get(1));
+        System.out.print("5: "+mymap2.get(1).val);
+        System.out.println("Insertion Order: ");
         mymap.startFromFirst();
     }
 }
