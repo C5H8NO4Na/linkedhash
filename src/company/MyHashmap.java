@@ -35,6 +35,8 @@ public class MyHashmap<K,V> {
             hash=key.hashCode()&(table.length-1);
         }
 
+        public Entry getAfter(){ return after; }
+        public V getVal(){ return val; }
     }
 
     public MyHashmap clone(){
