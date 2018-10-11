@@ -5,7 +5,7 @@ public class MyHashmap<K,V> {
     public boolean insertion=true;
     public static int DEFAULT_TABLE_SIZE = 16;
     Entry[] table;
-    private Entry head=null;
+    public Entry head=null;
 
     public Integer[] hashFunction(Integer[] arr, Integer[] hash){
         Integer[] a=new Integer[arr.length];
