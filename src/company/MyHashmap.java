@@ -156,7 +156,7 @@ public class MyHashmap<K,V> {
         boolean is=true;
         if(e==null){ is=false; }
         int i=1;
-        while(e.after!=null&&is){
+        while(e!=null&&is){
             System.out.print(i+": "+e.val+"  ");
             e=e.after;
             i++;
