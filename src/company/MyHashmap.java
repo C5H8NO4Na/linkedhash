@@ -73,7 +73,7 @@ public class MyHashmap<K,V> {
 
     public boolean isEmpty(){
         for(Entry e:table){
-            if(!e.equals(null)){ return false; }
+            if(e!=null){ return false; }
         }
         return true;
     }
@@ -101,6 +101,12 @@ public class MyHashmap<K,V> {
 
     public boolean put(K k, V v){
         Entry p=new Entry(k, null);
+        Entry entry=new Entry(k, v);
+        if(isEmpty()){
+            table[p.hash]=entry;
+            head=entry;
+            return true;
+        }
         Entry e=table[p.hash];
         if(this.get(k)!=null){ return false; }
         if(this.size()>=table.length){
@@ -110,10 +116,9 @@ public class MyHashmap<K,V> {
             }
             table=t;
         }
-        Entry entry=new Entry(k, v);
         if(e==null){
             table[p.hash]=entry;
-            if(insertion){
+            if(!insertion){
                 e=head;
                 while(e!=null){
                     e=e.after;
@@ -131,7 +136,7 @@ public class MyHashmap<K,V> {
             e=e.next;
         }
         e.next=entry;
-        if(insertion){
+        if(!insertion){
             e=head;
             while(e!=null){
                 e=e.after;
