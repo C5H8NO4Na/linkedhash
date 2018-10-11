@@ -6,7 +6,7 @@ public class MyHashmap<K,V> {
     //insertion order vs access order
     public boolean insertion=true;
     public static int DEFAULT_TABLE_SIZE = 16;
-    Entry[] table = new Entry[DEFAULT_TABLE_SIZE];
+    Entry[] table;
     private Entry head=null;
 
     public Integer[] hashFunction(Integer[] arr, Integer[] hash){
@@ -15,6 +15,11 @@ public class MyHashmap<K,V> {
             a[i]=(arr[i]%hash.length);
         }
         return a;
+    }
+
+    public MyHashmap(boolean insertion){
+        insertion=true;
+        table = new Entry[DEFAULT_TABLE_SIZE];
     }
 
     public class Entry <K, V>{
@@ -35,7 +40,7 @@ public class MyHashmap<K,V> {
     }
 
     public MyHashmap clone(){
-        MyHashmap<K,V> newMap=new MyHashmap<>();
+        MyHashmap<K,V> newMap=new MyHashmap<>(this.insertion);
         Entry e=head;
         if(e==null){ return null; }
         while(e.after!=null){
@@ -105,20 +110,39 @@ public class MyHashmap<K,V> {
             }
             table=t;
         }
+        Entry entry=new Entry(k, v);
         if(e==null){
-            table[p.hash]=new Entry(k, v);
-            e.after=head;
-            if(head!=null){head.before=e;}
-            head=e;
+            table[p.hash]=entry;
+            if(insertion){
+                e=head;
+                while(e!=null){
+                    e=e.after;
+                }
+                e.after=entry;
+                entry.before=e;
+                return true;
+            }
+            entry.after=head;
+            head.before=entry;
+            head=entry;
             return true;
         }
         while(e.next!=null){
             e=e.next;
         }
-        e.next=new Entry(k, v);
-        e.after=head;
-        if(head!=null){head.before=e;}
-        head=e;
+        e.next=entry;
+        if(insertion){
+            e=head;
+            while(e!=null){
+                e=e.after;
+            }
+            e.after=entry;
+            entry.before=e;
+            return true;
+        }
+        entry.after=head;
+        head.before=entry;
+        head=entry;
         return true;
     }
 
@@ -133,28 +157,33 @@ public class MyHashmap<K,V> {
     }
 
     public boolean remove(Object key){
-        Entry p=new Entry(key, null);
-        if(table[p.hash]==null) { return false; }
-        Entry e=table[p.hash];
-
-        if(e.key.equals(key)&&e.next==null){
-            e.before=e.after;
-            table[p.hash]=null;
+        Entry e=get(key);
+        if(e==null){ return false; }
+        Entry p=new Entry(key,null);
+        p=table[p.hash];
+        if(p==e){
+            if(e==head){
+                e.after=head;
+                return true;
+            }
+            e.before.after=e.after;
             return true;
         }
-        while(!e.key.equals(key) && e.next!=null){
-            e=e.next;
+        while(p.next!=e){
+            p=p.next;
         }
-        if(e.next==null){ return false; }
-        e.before=e.after;
-        e.before.next=e.next;
+        p.next=e.next;
+        if(e==head){
+            e.after=head;
+            return true;
+        }
+        e.before.after=e.after;
         return true;
     }
 
     public boolean remove(Object key, Object val){
         if(get(key)==null||get(key).val!=val){ return false; }
-        remove(key);
-        return true;
+        return remove(key);
     }
 
     public V replace(K k, V v){
