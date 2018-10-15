@@ -102,7 +102,10 @@ public class MyHashmap<K,V> {
     public boolean put(K k, V v){
         Entry p=new Entry(k, null);
         Entry e=table[p.hash];
-        if(this.get(k)!=null){ return false; }
+        if(this.get(k)!=null){
+            this.get(k).val=v;
+            return true;
+        }
         if(this.size()>=table.length){
             Entry[] t=new Entry[table.length*2];
             for(int i=0; i<table.length; i++){
@@ -163,40 +166,44 @@ public class MyHashmap<K,V> {
             System.out.print(i+": "+e.val+"  ");
             e=e.after;
             i++;
+            if(i>10){
+                System.out.println("infinite loop");
+                is=false;
+            }
         }
     }
 
     public boolean remove(Object key){
         Entry e=get(key);
         if(e==null){ return false; }
-        Entry p=new Entry(key,null);
-        p=table[p.hash];
-        if(p==e){
-            if(e==head){
-                if(e.before!=null){
-                    head=e.before;
-                    head.after=e.after;
-                }
+
+        Entry p=table[e.hash];
+        if(e==p){
+            if(e!=head){
+                e.before.after=e.after;
+                e.after.before=e.before;
+            }
+            else{
+                e.after.before=null;
                 head=e.after;
-                return true;
             }
-            if(e.before==null){
-                table[p.hash]=null;
-                return true;
-            }
-            e.before.after=e.after;
-            table[p.hash]=null;
+            table[p.hash]=e.next;
+            e=null;
             return true;
         }
         while(p.next!=e){
             p=p.next;
         }
         p.next=e.next;
-        if(e==head){
-            e.after=head;
-            return true;
+        if(e!=head){
+            e.before.after=e.after;
+            e.after.before=e.before;
         }
-        e.before.after=e.after;
+        else{
+            e.after.before=null;
+            head=e.after;
+        }
+        e=null;
         return true;
     }
 
@@ -247,3 +254,30 @@ public class MyHashmap<K,V> {
         table=new Entry[DEFAULT_TABLE_SIZE];
     }
 }
+
+
+
+/*
+public Entry findItem(K key) {
+
+ Entry currentPos = find(key);
+ while(currentPos.key != key || currentPos.next != null) {
+    currentPos = currentPos.next;
+
+}
+
+
+public void remove(K key) {
+    Entry entryToRemove = find(key);
+    prevEntry = entryToRemove.prev;
+    if(entryToRemove.next != null) {
+        nextEntry = entryToRemove.next
+    }
+    prevEntry.next = nextEntry;
+
+
+
+    [   ]   ------ [   ]  ------ [     ]
+
+    }
+ */
