@@ -180,14 +180,20 @@ public class MyHashmap<K,V> {
         Entry p=table[e.hash];
         if(e==p){
             if(e!=head){
-                e.before.after=e.after;
-                e.after.before=e.before;
+                if(e.before!=null) {
+                    e.before.after = e.after;
+                }
+                if(e.after!=null) {
+                    e.after.before = e.before;
+                }
             }
             else{
                 e.after.before=null;
                 head=e.after;
             }
             table[p.hash]=e.next;
+            e.before=null;
+            e.after=null;
             e=null;
             return true;
         }
@@ -196,13 +202,19 @@ public class MyHashmap<K,V> {
         }
         p.next=e.next;
         if(e!=head){
-            e.before.after=e.after;
-            e.after.before=e.before;
+            if(e.before!=null) {
+                e.before.after = e.after;
+            }
+            if(e.after!=null) {
+                e.after.before = e.before;
+            }
         }
         else{
             e.after.before=null;
             head=e.after;
         }
+        e.before=null;
+        e.after=null;
         e=null;
         return true;
     }
