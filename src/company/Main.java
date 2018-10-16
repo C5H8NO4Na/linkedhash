@@ -98,9 +98,10 @@ public class Main {
             e=e.getAfter();
         }
         if(most>0){
+            System.out.println("Words that matched the pattern:");
             for(int i=0; i<list.size(); i++){
-                if(){
-
+                if(turnInt(list.get(i))==patt){
+                    System.out.println(s[i]);
                 }
             }
         }
