@@ -236,9 +236,11 @@ public class MyHashmap<K,V> {
     public Entry get(Object key){
         Entry p=new Entry(key, null);
         Entry e=table[p.hash];
-        if(e == null){ return null; }
+        if(e==null||key==null||e.key==null){
+            System.out.println("help");
+            return null; }
         while(!e.key.equals(key)){
-            if(e==null){ return null; }e=e.next; }
+            if(e==null||key==null){ return null; }e=e.next; }
         return e;
     }
 
@@ -246,10 +248,10 @@ public class MyHashmap<K,V> {
         int n=0;
         for(Entry e:table){
             if(e!=null){
-                n+=1;
+                n++;
                 while(e.next!=null){
                     e=e.next;
-                    n+=1;
+                    n++;
                 }
             }
         }

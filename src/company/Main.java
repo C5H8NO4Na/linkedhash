@@ -136,11 +136,12 @@ public class Main {
         mymap.startFromFirst();
         System.out.println(mymap.size());
 
-        String[] stringList = {"good","food","hood","glad","hammer"};
-        String pattern = "wood";
-
-        System.out.println(anagram("santa","satan"));
+        System.out.println(anagram("earth", "heart"));
         System.out.println(anagram("listen","silent"));
         System.out.println(anagram("boolean","boogieman"));
+
+        String[] stringList = {"good","food","hood","glad","hammer"};
+        String pattern = "wood";
+        pattern(pattern, stringList);
     }
 }
