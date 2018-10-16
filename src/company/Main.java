@@ -74,18 +74,27 @@ public class Main {
                     }
                     m.put(s[i].substring(j, j + 1) + j, b);
                 }
-                list.add(m);
+                if(turnInt(m)!=0){
+                    list.add(m);
+                }
             }
         }
+
     }
 
     static int turnInt(MyHashmap<String, Boolean> m){
         String n="";
         for(int i=0; i<m.size(); i++){
             MyHashmap.Entry e=m.head;
-            //while(e.getKey().charAt(1)!=i){
-
-            //}
+            String s=(String)e.getKey();
+            while(s.charAt(1)!=i){
+                e=e.getAfter();
+                s=(String)e.getKey();
+            }
+            if((boolean)e.getVal()){
+                n+=1;
+            }
+            n+=0;
         }
         return Integer.parseInt(n);
     }
