@@ -182,7 +182,7 @@ public class MyHashmap<K,V> {
                 if(e.after!=null){ e.after.before = e.before; }
             }
             else{
-                e.after.before=null;
+                if(e.after!=null){ e.after.before=null; }
                 head=e.after;
             }
             table[p.hash]=e.next;
@@ -204,7 +204,7 @@ public class MyHashmap<K,V> {
             }
         }
         else{
-            e.after.before=null;
+            if(e.after!=null){ e.after.before=null; }
             head=e.after;
         }
         e.before=null;

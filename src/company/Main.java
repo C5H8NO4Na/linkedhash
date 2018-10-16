@@ -41,13 +41,10 @@ public class Main {
             be=bMap.head;
             ae=aMap.head;
             if (be == null) {
-                System.out.println("h");
                 return false;
             }
             while (ae.getVal() != be.getVal()) {
-                System.out.println("!");
                 if(be.getAfter()==null){
-                    System.out.println("a");
                     return false;
                 }
                 be=be.getAfter();
@@ -59,12 +56,6 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        MyHashmap<Integer, String> mymap12 = new MyHashmap<>(true);
-        mymap12.put(1,"a");
-        mymap12.put(2,"b");
-        mymap12.remove(1);
-        System.out.println(mymap12.size());
-        mymap12.startFromFirst();
 
         //FIX ACCESS ORDEREOE
         MyHashmap<Integer, String> mymap = new MyHashmap<>(false);
@@ -79,5 +70,7 @@ public class Main {
         String pattern = "wood";
 
         System.out.println(anagram("santa","satan"));
+        System.out.println(anagram("listen","silent"));
+        System.out.println(anagram("boolean","boogieman"));
     }
 }
