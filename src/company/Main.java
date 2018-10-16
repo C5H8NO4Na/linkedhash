@@ -74,9 +74,7 @@ public class Main {
                     }
                     m.put(s[i].substring(j, j + 1) + j, b);
                 }
-                if(turnInt(m)!=0){
                     list.add(m);
-                }
             }
         }
         MyHashmap<Integer, Integer> sim = new MyHashmap<>(false);
@@ -87,6 +85,26 @@ public class Main {
             }
             else{ sim.put(turnInt(list.get(i)), 1); }
         }
+        MyHashmap.Entry e=sim.head;
+        int most=0;
+        int patt=0;
+        for(int i=0; i<sim.size(); i++){
+            if((int)e.getVal()>most){
+                if((int)e.getKey()!=0) {
+                    most = (int) e.getVal();
+                    patt = (int) e.getKey();
+                }
+            }
+            e=e.getAfter();
+        }
+        if(most>0){
+            for(int i=0; i<list.size(); i++){
+                if(){
+
+                }
+            }
+        }
+        else{ System.out.println("none match a pattern"); }
     }
 
     static int turnInt(MyHashmap<String, Boolean> m){
