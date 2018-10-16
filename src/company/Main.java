@@ -17,18 +17,18 @@ public class Main {
      */
 
     static boolean anagram(String a, String b) {
-        MyHashmap<Integer, String> aMap = new MyHashmap<>(true);
-        MyHashmap<Integer, String> bMap = new MyHashmap<>(true);
+        MyHashmap<Integer, Character> aMap = new MyHashmap<>(true);
+        MyHashmap<Integer, Character> bMap = new MyHashmap<>(true);
 
         if (a == null || b == null) {
             return false;
         }
 
         for (int i = 0; i < a.length(); i++) {
-            aMap.put(i, a.substring(i, i + 1));
+            aMap.put(i, a.charAt(i));
         }
         for (int i = 0; i < b.length(); i++) {
-            bMap.put(i, b.substring(i, i + 1));
+            bMap.put(i, b.charAt(i));
         }
 
         if (aMap.size() != bMap.size()) {
