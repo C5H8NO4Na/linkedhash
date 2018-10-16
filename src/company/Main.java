@@ -79,7 +79,14 @@ public class Main {
                 }
             }
         }
-
+        MyHashmap<Integer, Integer> sim = new MyHashmap<>(false);
+        for(int i=0; i<list.size(); i++){
+            MyHashmap.Entry e=sim.get(list.get(i));
+            if(e!=null){
+                //sim.replace(e.getKey(), (int)sim.get(list.get(i)).getVal()+1);
+            }
+            sim.put(turnInt(list.get(i)), 1);
+        }
     }
 
     static int turnInt(MyHashmap<String, Boolean> m){
