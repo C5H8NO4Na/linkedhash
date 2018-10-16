@@ -16,79 +16,68 @@ public class Main {
     result = ["good","food","hood"]
      */
 
-    static boolean anagram(String a, String b){
-        MyHashmap<Integer, String> aMap=new MyHashmap<>(true);
-        MyHashmap<Integer, String> bMap=new MyHashmap<>(true);
+    static boolean anagram(String a, String b) {
+        MyHashmap<Integer, String> aMap = new MyHashmap<>(true);
+        MyHashmap<Integer, String> bMap = new MyHashmap<>(true);
 
-        if(a==null||b==null){ return false; }
-
-        for(int i=0; i<a.length(); i++){
-            aMap.put(i, a.substring(i,i+1));
-        }
-        for(int i=0; i<b.length(); i++){
-            bMap.put(i, b.substring(i,i+1));
+        if (a == null || b == null) {
+            return false;
         }
 
-        if(aMap.size()!=bMap.size()){ return false; }
+        for (int i = 0; i < a.length(); i++) {
+            aMap.put(i, a.substring(i, i + 1));
+        }
+        for (int i = 0; i < b.length(); i++) {
+            bMap.put(i, b.substring(i, i + 1));
+        }
 
-        Object ae=aMap.head;
-        Object be;
+        if (aMap.size() != bMap.size()) {
+            return false;
+        }
 
-        //while in while
-        while(aMap.size()!=0){
+        MyHashmap.Entry ae = aMap.head;
+        MyHashmap.Entry be = bMap.head;
+        while (aMap.size() != 0) {
             be=bMap.head;
-            while(((MyHashmap.Entry) ae).getVal()!=((MyHashmap.Entry) be).getVal()){
-                if(be==null){ return false; }
-                be=((MyHashmap.Entry) be).getAfter();
+            ae=aMap.head;
+            if (be == null) {
+                System.out.println("h");
+                return false;
             }
-            ae=((MyHashmap.Entry) ae).getAfter();
+            while (ae.getVal() != be.getVal()) {
+                System.out.println("!");
+                if(be.getAfter()==null){
+                    System.out.println("a");
+                    return false;
+                }
+                be=be.getAfter();
+            }
+            bMap.remove(be.getKey());
+            aMap.remove(ae.getKey());
         }
         return true;
     }
 
     public static void main(String[] args) {
+        MyHashmap<Integer, String> mymap12 = new MyHashmap<>(true);
+        mymap12.put(1,"a");
+        mymap12.put(2,"b");
+        mymap12.remove(1);
+        System.out.println(mymap12.size());
+        mymap12.startFromFirst();
 
+        //FIX ACCESS ORDEREOE
         MyHashmap<Integer, String> mymap = new MyHashmap<>(false);
-
         mymap.put(1,"a");
         mymap.put(2,"b");
         mymap.remove(1);
         System.out.print("Access: ");
         mymap.startFromFirst();
-
-        System.out.println("\n");
-
-        MyHashmap<Integer, String> mymap2 = new MyHashmap<>(true);
-
-        mymap2.put(1,"a");
-        mymap2.put(2,"b");
-        mymap2.remove(1);
-        System.out.print("Insertion: ");
-        mymap2.startFromFirst();
-
-        System.out.println("\n");
-
-        MyHashmap<Integer, String> mymap3 = new MyHashmap<>(true);
-        mymap3.put(1,"a");
-        mymap3.put(2,"b");
-        mymap3.put(3,"c");
-        System.out.print("Insertion: ");
-        mymap3.startFromFirst();
-
-        System.out.println("\n");
-
-        MyHashmap<Integer, String> mymap4 = new MyHashmap<>(false);
-        mymap4.put(1,"a");
-        mymap4.put(2,"b");
-        mymap4.put(3,"c");
-        System.out.print("Access: ");
-        mymap4.startFromFirst();
-
+        System.out.println(mymap.size());
 
         String[] stringList = {"good","food","hood","glad","hammer"};
         String pattern = "wood";
 
-        //System.out.println(anagram("santa","satan"));
-
+        System.out.println(anagram("santa","satan"));
     }
 }

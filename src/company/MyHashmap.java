@@ -37,6 +37,7 @@ public class MyHashmap<K,V> {
 
         public Entry getAfter(){ return after; }
         public V getVal(){ return val; }
+        public K getKey(){ return key; }
     }
 
     public MyHashmap clone(){
@@ -147,9 +148,6 @@ public class MyHashmap<K,V> {
         while(e.next!=null){
             e=e.next;
         }
-        if(insertion){
-
-        }
         e.next=entry;
         e.after=head;
         if(head!=null){head.before=e;}
@@ -180,12 +178,8 @@ public class MyHashmap<K,V> {
         Entry p=table[e.hash];
         if(e==p){
             if(e!=head){
-                if(e.before!=null) {
-                    e.before.after = e.after;
-                }
-                if(e.after!=null) {
-                    e.after.before = e.before;
-                }
+                if(e.before!=null){ e.before.after = e.after; }
+                if(e.after!=null){ e.after.before = e.before; }
             }
             else{
                 e.after.before=null;
@@ -202,10 +196,10 @@ public class MyHashmap<K,V> {
         }
         p.next=e.next;
         if(e!=head){
-            if(e.before!=null) {
+            if(e.before!=null){
                 e.before.after = e.after;
             }
-            if(e.after!=null) {
+            if(e.after!=null){
                 e.after.before = e.before;
             }
         }
