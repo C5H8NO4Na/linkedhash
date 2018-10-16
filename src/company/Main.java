@@ -1,5 +1,8 @@
 package company;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Main {
 
     /* Challenge 1:
@@ -53,6 +56,38 @@ public class Main {
             aMap.remove(ae.getKey());
         }
         return true;
+    }
+
+    static void pattern(String keyWord, String[] s){
+        MyHashmap<String, Boolean> keyMap = new MyHashmap<>(false);
+        for(int i=0; i<keyWord.length();i++){
+            keyMap.put(keyWord.substring(i,i+1)+i, true);
+        }
+        ArrayList<MyHashmap> list = new ArrayList<>();
+        for(int i=0; i<s.length; i++) {
+            if (s[i].length()==keyWord.length()){
+                MyHashmap<String, Boolean> m = new MyHashmap<>(false);
+                for (int j = 0; j < s[i].length(); j++) {
+                    boolean b = false;
+                    if (keyMap.get(s[i].substring(j, j + 1) + j) != null) {
+                        b = true;
+                    }
+                    m.put(s[i].substring(j, j + 1) + j, b);
+                }
+                list.add(m);
+            }
+        }
+    }
+
+    static int turnInt(MyHashmap<String, Boolean> m){
+        String n="";
+        for(int i=0; i<m.size(); i++){
+            MyHashmap.Entry e=m.head;
+            //while(e.getKey().charAt(1)!=i){
+
+            //}
+        }
+        return Integer.parseInt(n);
     }
 
     public static void main(String[] args) {

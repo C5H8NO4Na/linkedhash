@@ -260,30 +260,3 @@ public class MyHashmap<K,V> {
         table=new Entry[DEFAULT_TABLE_SIZE];
     }
 }
-
-
-
-/*
-public Entry findItem(K key) {
-
- Entry currentPos = find(key);
- while(currentPos.key != key || currentPos.next != null) {
-    currentPos = currentPos.next;
-
-}
-
-
-public void remove(K key) {
-    Entry entryToRemove = find(key);
-    prevEntry = entryToRemove.prev;
-    if(entryToRemove.next != null) {
-        nextEntry = entryToRemove.next
-    }
-    prevEntry.next = nextEntry;
-
-
-
-    [   ]   ------ [   ]  ------ [     ]
-
-    }
- */
